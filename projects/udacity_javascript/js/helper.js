@@ -131,6 +131,7 @@ function initializeMap() {
     var infoWindow = new google.maps.InfoWindow({
       content: name
     });
+    
     google.maps.event.addListener(marker, 'click', function() {
       infoWindow.open(map,marker)
     });
