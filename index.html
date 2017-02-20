@@ -6,7 +6,6 @@
         <link href="css/styles.css" rel="stylesheet">
         <script src="js/jQuery.js"></script>
         <script src="js/quiz.js"></script>
-        <script src="js/helper.js"></script>
   
     </head>
     <body>
@@ -33,5 +32,26 @@
                     So if the black boy fly don't mistake him for falcon
                 </div>
             </div>
+
+            <script src="js/helper.js"></script>
+            <script type="text/javascript">
+                function textLoader(file){
+                    var rawFile = new XMLHttpRequest();
+                    rawFile.open("GET", file, false);
+                    rawFile.onreadystatechange = function (){
+                        if(rawFile.readyState === 4){
+                            if(rawFile.status === 200 || rawFile.status == 0){
+                                var allText = rawFile.responseText;
+                                alert(allText);
+                            }
+                        }
+                    }
+                    rawFile.send(null)
+                }
+
+                var txt = textLoader("RandomTextFile.txt")
+                $("#description").append(txt)
+                
+            </script>
     </body>
   </html>
