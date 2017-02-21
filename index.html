@@ -6,6 +6,7 @@
         <link href="css/styles.css" rel="stylesheet">
         <script src="js/jQuery.js"></script>
         <script src="js/quiz.js"></script>
+        <script src="js/helper.js"></script>
   
     </head>
     <body>
@@ -14,8 +15,7 @@
                 <div class="image"><img src="images/welcome.jpg" alt="Image goes here" style = "float:left;width:90%;height:200px"></div>
                 <div class="description">
                     <em>Crossword puzzles</em>
-                    From glasshouses I throw stones at <a href="">Goliaths</a>
-                    Tryna break in my house, I killed pigs, wolves & lions
+                    From glasshouses I throw stones at <a href="">Goliaths</a><!--Tryna break in my house, I killed pigs, wolves & lions
                     The reincarnation of King David, I ain't lyin'
                     How could I keep it plain and not fly in
                     with the intent to offset demands with numerous supplies
@@ -29,26 +29,10 @@
                     Physical/Earthly stats couldn't determine my outcome
                     How come, I was chosen not to be outdone
                     Couldn't denounce the ounce of knowledge announced
-                    So if the black boy fly don't mistake him for falcon
+                    So if the black boy fly don't mistake him for falcon-->
                 </div>
             </div>
-
-            <script src="js/helper.js"></script>
             <script type="text/javascript">
-                function textLoader(file){
-                    var rawFile = new XMLHttpRequest();
-                    rawFile.open("GET", file, false);
-                    rawFile.onreadystatechange = function (){
-                        if(rawFile.readyState === 4){
-                            if(rawFile.status === 200 || rawFile.status == 0){
-                                var allText = rawFile.responseText;
-                                alert(allText);
-                            }
-                        }
-                    }
-                    rawFile.send(null)
-                }
-
                 var txt = textLoader("RandomTextFile.txt")
                 $("#description").append(txt)
                 
