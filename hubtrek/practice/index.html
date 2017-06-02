@@ -1,0 +1,60 @@
+<html>
+<head>
+  
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  
+</head>
+
+<style>
+  /*This simple animation turns a block of colour into another every 4 seconds*/
+  animator{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation-name: example;
+    animation-duration: 4s; 
+  }
+  @keyframes example{
+    0% {background-color: red;}
+    25% {background-color: orange;}
+    50% {background-color: yellow;}
+    75% {background-color: green;}
+    100% {background-color: blue;}
+  }
+  /*Occurs only once*/
+  text{
+    animation-duration: 3s;
+    animation-name : slidein;
+  }
+  @keyframes slidein{
+    from{
+      margin-top: 100%;
+      width: 100%;
+    }
+    to{
+      margin-top: 50%;
+      width: 50%;
+    }
+  }
+
+
+</style>
+
+<body layout="row" ng-app="test">
+  <!-- <animator></animator>
+  <text> Testing</text> -->
+  <button class="animated bounce">Yellow</button>
+
+	<!-- Angular libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+  <script src="controller_test.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+</body>
+</html>

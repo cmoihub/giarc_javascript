@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Angular + FlexBox</title>
+  <!-- 
+  <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->    
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div data-ng-app="App">
+  
+<div class="architecture" data-ng-controller="base">
+	<div class="row one">
+		<div class="content">
+        <div class="block title">
+          FlexBox + Angular
+        </div>
+		</div>
+		<div class="overlay">
+        <div class="block">
+          More Information
+        </div>
+		</div>
+	</div>
+	<div class="row two">
+		<div class="content">
+        <div class="block">
+          Size two
+        </div>
+		</div>
+		<div class="overlay">
+        <div class="block">
+          More Information..
+        </div>
+		</div>
+	</div>
+	<div class="row two">
+		<div class="content columns">
+			<div class="block" data-ng-click="remove($index, 'columns')" data-ng-repeat="cols in columns track by $index">
+          {{cols}}
+			</div>
+        <div class="block add" data-ng-click="add('columns')">
+          +
+        </div>
+		</div>
+	</div>
+	<div class="row one">
+		<div class="content">
+        <div class="block">
+          Size one
+        </div>
+		</div>
+		<div class="overlay">
+        <div class="block">
+          
+        </div>
+		</div>
+	</div>
+	<div class="row three columns">
+		<div class="block">
+			<div class="content rows">
+				<div class="row multirows">
+					<div class="block" data-ng-repeat="mini in minis track by $index" data-ng-click="remove($index, 'minis')">
+              {{mini}}
+					</div>
+					<div class="block add" data-ng-click="add('minis')">
+              +
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block">
+			<div class="content rows">
+				<div class="row">
+            <div class="block">
+              This is the first row
+            </div>
+				</div>
+				<div class="row">
+            <div class="block">
+              This is the second row
+            </div>
+				</div>
+			</div>
+			<div class="overlay short">
+          <div class="block">
+            More info over both rows
+          </div>
+			</div>
+		</div>
+		<div class="block">
+			<div class="content">
+				<div class="block">
+            Bigger block in size three row.
+          </div>
+			</div>
+			<div class="overlay short">
+          <div class="block">
+            More info
+          </div>
+			</div>		
+		</div>
+		<div class="block">
+			<div class="content">
+          <div class="block">
+				 Bigger block in size three row with more   information on it here.
+          </div>
+			</div>
+			<div class="overlay short">
+          <div class="block">
+          
+          </div>
+			</div>
+		</div>
+	</div>
+	<div class="row one">
+		<div class="content">
+        <div class="block">
+            Size one row
+        </div>
+		</div>
+		<div class="overlay">
+        <div class="block">
+          More info
+        </div>
+		</div>
+	</div>
+  <div class="row" data-ng-repeat="row in rows track by $index" data-ng-class="row.size" data-ng-click="remove($index, 'rows')">
+    <div class="content">
+      <div class="block">
+        {{row.number}}
+      </div>
+    </div>
+  </div>
+  <div class="row two">
+		<div class="content columns">
+			<div class="block add" data-ng-click="add('rows','one')">
+          Add a size one row.
+        </div>
+        <div class="block add" data-ng-click="add('rows','two')">
+          Add a size two row.
+        </div>
+        <div class="block add" data-ng-click="add('rows','three')">
+          Add a size three row.
+        </div>
+    </div>
+  </div>
+  
+</div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
