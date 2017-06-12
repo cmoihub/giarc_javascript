@@ -1,0 +1,19 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "private": true,
+  // "repository": {
+  //   "type": "git",
+  //   "url": "git://github.com/username/repository.git"
+  // },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Craig Isesele",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

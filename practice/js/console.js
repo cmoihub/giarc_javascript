@@ -7,7 +7,7 @@ function check(str){
     //var b = str
     //var a = str.split(' ').join('')
     //var b = a.split('').reverse().join()
-    return a === b;
+    // return a === b;
 }
 
 var checked = check ("Do geese see God");
@@ -70,7 +70,6 @@ var  incrementLastArrayElement =  function (_array){
     }
 	*/
 	
-	//function incrementLastArrayElement(_array)  {
     var newArray = []
     newArray = _array.slice(0)
     var lastNumber = newArray.pop()
