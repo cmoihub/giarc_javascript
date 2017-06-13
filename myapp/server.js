@@ -1,6 +1,7 @@
 //req - request, res - response
 
 var express = require ('express'),
+	fs = require('fs'),
 	app = express();
 
 var port = 3000;
@@ -29,11 +30,8 @@ var server = app.listen(port, (err) => {
 //localhost:3000/search/hello/4 will output hello 4 times in a row
 //
 ///* Word Manipulation Section *///
-var words = {
-	"ese": 10,
-	"precious": 7,
-	"craig": 4
-}
+var data = fs.readFileSync('words.json')
+var words = JSON.parse(data);
 
 app.get('/search/:flower/:num', sendFlowers = function(req, res){
 	var data = req.params;
@@ -96,6 +94,9 @@ app.get('/group', sendGroup = function(req, res){
 		string2 = "",
 		emptyString = "",
 		times = round(names.length/2,2);
+	for (var i = 0; i < names.length; i++){
+		names[i] = names[i].toLowerCase();
+	}
 	for (var i = 0; i < times; i++){
 		string1 += selectRandomItem(names, group1);
 		string2 += selectRandomItem(names, group2);
@@ -159,7 +160,7 @@ function round(value, decimals) {
 function selectRandomItem (items, subItems){
 	if(items.length !== 0){
 		var temp = "";
-		item = items[Math.floor(Math.random()*items.length)].toLowerCase(); 
+		item = items[Math.floor(Math.random()*items.length)]; 
 		temp += item + ", ";
 		subItems.push(item);
 		removeItem(item, items);
