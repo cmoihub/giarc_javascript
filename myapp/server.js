@@ -71,6 +71,10 @@ app.get('/add/:word/:score?', addWord = function(req, res){
 		}	
 	}else{
 		words[word] = score;
+		var data = JSON.stringify(words);
+		fs.writeFile('words.json', data, finished = function(err){
+			console.log('all set');
+		});
 		reply = {
 			msg: "Thanks for your word"
 		}
