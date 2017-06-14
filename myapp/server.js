@@ -2,10 +2,18 @@
 
 var express = require ('express'),
 	fs = require('fs'),
-	app = express();
+	app = express(),
+	port = 3000;
 
-var port = 3000;
+var data = fs.readFileSync('words.json');
+var words = JSON.parse(data);
 
+// var names = ['Craig', 'Moyin', 'Oma', 'Isesele', 'Fiyin', 
+// 			'Ayo', 'Sola', 'Tobi', 'Mitchell', 'Oluchi', 
+// 			'Onosemudiamen', 'Dami', 'Yomi'];
+var	group_data = fs.readFileSync('group.json'),
+	names = JSON.parse(group_data);
+	names = names.members;
 
 app.use(express.static(__dirname + '/www'));
 //Store all HTML files in www folder.
@@ -30,9 +38,6 @@ var server = app.listen(port, (err) => {
 //localhost:3000/search/hello/4 will output hello 4 times in a row
 //
 ///* Word Manipulation Section *///
-var data = fs.readFileSync('words.json')
-var words = JSON.parse(data);
-
 app.get('/search/:flower/:num', sendFlowers = function(req, res){
 	var data = req.params;
 	var num = data.num;
@@ -42,6 +47,11 @@ app.get('/search/:flower/:num', sendFlowers = function(req, res){
 	}
 	res.send(reply + reply);
 });
+
+// app.get('/temp', temp = function(req, res){
+// 	var reply = temp_names.names;
+// 	res.send(reply);
+// })
 
 app.get('/search/:word/', searchWord = function(req, res){
 	var word = req.params.word;
@@ -88,9 +98,6 @@ app.get('/all',sendAll = function(req, res){
 
 
 //https://stackoverflow.com/questions/12025820/how-to-send-array-of-ids-correctly-in-express
-var names = ['Craig', 'Moyin', 'Oma', 'Isesele', 'Fiyin', 
-			'Ayo', 'Sola', 'Tobi', 'Mitchell', 'Oluchi', 
-			'Onosemudiamen', 'Dami', 'Yomi']
 app.get('/group', sendGroup = function(req, res){
 	var	group1 = [],
 		string1 = "",
@@ -144,6 +151,19 @@ app.get('/group/remove/:person', removePerson = function(req, res){
 	
 	res.send(reply);
 });
+
+// http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+hashCode = function(str) {
+  var hash = 0, i, chr;
+  if (str.length === 0) return hash;
+  for (i = 0; i < str.length; i++) {
+    chr = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
 /**
  * Represents a number using exponential notation
  * Used here to round up a number
