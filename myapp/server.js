@@ -101,9 +101,8 @@ var	group1 = [],
 	string1 = "",
 	group2 = [],
 	string2 = "",
-	emptyString = "",
-	times = round(names.length/2,2);
-
+	emptyString = "";
+var times = round(names.length/2,2);
 //https://stackoverflow.com/questions/12025820/how-to-send-array-of-ids-correctly-in-express
 app.get('/group', sendGroup = function(req, res){
 	for (var i = 0; i < names.length; i++){
@@ -134,11 +133,11 @@ app.get('/group/add/:person?', addPerson = function(req, res){
 			reply = person + "is already in the array, if you still" + 
 			" want to add" + person + "include their initials or something"
 		} else {
-			// var group_data = JSON.stringify(names);
-			// fs.writeFile('group.json', group_data, success = function(err){
-			// 	console.log("Done!");
-			// });
-			names.push(person);
+			name_data.members.push(person);
+			var group_data = JSON.stringify(name_data);
+			fs.writeFile('group.json', group_data, success = function(err){
+				console.log("Done!");
+			});
 			reply = person + " added"
 		}
 	}
