@@ -11,12 +11,12 @@ var express = require ('express'),
 	  console.log(`server is listening on ${port}`);
 	});
 
-var data = fs.readFileSync('words.json'),
-	words = JSON.parse(data);
+var word_data = fs.readFileSync('words.json'),
+	words = JSON.parse(word_data);
 
 var	group_data = fs.readFileSync('group.json'),
-	names = JSON.parse(group_data);
-	names = names.members;
+	name_data = JSON.parse(group_data);
+	names = name_data.members;
 
 app.use(express.static(__dirname + '/arc'));
 app.use(express.static(__dirname + '/arc/p5'));
@@ -82,8 +82,8 @@ app.get('/add/:word/:score?', addWord = function(req, res){
 		}	
 	}else{
 		words[word] = score;
-		var data = JSON.stringify(words);
-		fs.writeFile('words.json', data, finished = function(err){
+		var word_data = JSON.stringify(words);
+		fs.writeFile('words.json', word_data, finished = function(err){
 			console.log('all set');
 		});
 		reply = {
@@ -97,15 +97,15 @@ app.get('/all',sendAll = function(req, res){
 	res.send(words)
 });
 
+var	group1 = [],
+	string1 = "",
+	group2 = [],
+	string2 = "",
+	emptyString = "",
+	times = round(names.length/2,2);
 
 //https://stackoverflow.com/questions/12025820/how-to-send-array-of-ids-correctly-in-express
 app.get('/group', sendGroup = function(req, res){
-	var	group1 = [],
-		string1 = "",
-		group2 = [],
-		string2 = "",
-		emptyString = "",
-		times = round(names.length/2,2);
 	for (var i = 0; i < names.length; i++){
 		names[i] = names[i].toLowerCase();
 	}
@@ -115,8 +115,8 @@ app.get('/group', sendGroup = function(req, res){
 		emptyString += "-";
 	}
 	var reply = {
-		Group1: string1,
-		Group2: string2,
+		Group1: group1,
+		Group2: group2,
 		msg: times + " members"
 	}
 	res.send(reply);
@@ -134,6 +134,10 @@ app.get('/group/add/:person?', addPerson = function(req, res){
 			reply = person + "is already in the array, if you still" + 
 			" want to add" + person + "include their initials or something"
 		} else {
+			// var group_data = JSON.stringify(names);
+			// fs.writeFile('group.json', group_data, success = function(err){
+			// 	console.log("Done!");
+			// });
 			names.push(person);
 			reply = person + " added"
 		}
@@ -174,9 +178,9 @@ function selectRandomItem (items, subItems){
 	if(items.length !== 0){
 		var temp = "";
 		item = items[Math.floor(Math.random()*items.length)]; 
-		temp += item + ", ";
 		subItems.push(item);
 		removeItem(item, items);
+		temp += item + ", ";
 		return temp;	
 	}
 	else return "";
