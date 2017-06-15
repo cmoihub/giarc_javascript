@@ -3,36 +3,37 @@
 var express = require ('express'),
 	fs = require('fs'),
 	app = express(),
-	port = 3000;
+	port = 3000,
+	server = app.listen(port, (err) => {  
+	  if (err) {
+	    return console.log('something bad happened', err);
+	  }
+	  console.log(`server is listening on ${port}`);
+	});
 
-var data = fs.readFileSync('words.json');
-var words = JSON.parse(data);
+var data = fs.readFileSync('words.json'),
+	words = JSON.parse(data);
 
-// var names = ['Craig', 'Moyin', 'Oma', 'Isesele', 'Fiyin', 
-// 			'Ayo', 'Sola', 'Tobi', 'Mitchell', 'Oluchi', 
-// 			'Onosemudiamen', 'Dami', 'Yomi'];
 var	group_data = fs.readFileSync('group.json'),
 	names = JSON.parse(group_data);
 	names = names.members;
 
-app.use(express.static(__dirname + '/www'));
-//Store all HTML files in www folder.
-app.use(express.static(__dirname + '/script'));
-//Store all JS files in script folder.
-app.use(express.static(__dirname + '/style'));
-//Store all CSS files in view folder.
+app.use(express.static(__dirname + '/arc'));
+app.use(express.static(__dirname + '/arc/p5'));
+app.use(express.static(__dirname + '/arc/practice'));
 
-app.get('/',function(req,res){
-  res.sendFile('index.html');
-  //It will find and locate index.html from View or Scripts
+
+
+app.get('/practice',function(req,res){
+  res.sendFile('/practice/index.html');
 });
 
-// err is a callback
-var server = app.listen(port, (err) => {  
-  if (err) {
-    return console.log('something bad happened', err);
-  }
-  console.log(`server is listening on ${port}`);
+app.get('/',function(req,res){
+  res.sendFile('/p5/index.html');
+});
+
+app.get('/time',function(req,res){
+  res.sendFile('/timer.html');
 });
 
 //localhost:3000/search/hello/4 will output hello 4 times in a row
@@ -151,18 +152,6 @@ app.get('/group/remove/:person', removePerson = function(req, res){
 	
 	res.send(reply);
 });
-
-// http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
-hashCode = function(str) {
-  var hash = 0, i, chr;
-  if (str.length === 0) return hash;
-  for (i = 0; i < str.length; i++) {
-    chr = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
-};
 
 /**
  * Represents a number using exponential notation
