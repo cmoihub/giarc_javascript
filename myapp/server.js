@@ -102,16 +102,22 @@ var	group1 = [],
 	group2 = [],
 	string2 = "",
 	emptyString = "",
+	turn = true,
 	times = round(names.length/2,2);
+
 
 //https://stackoverflow.com/questions/12025820/how-to-send-array-of-ids-correctly-in-express
 app.get('/group', sendGroup = function(req, res){
 	for (var i = 0; i < names.length; i++){
 		names[i] = names[i].toLowerCase();
 	}
-	for (var i = 0; i < times; i++){
-		string1 += selectRandomItem(names, group1);
-		string2 += selectRandomItem(names, group2);
+	for (var i = 0; i < names.length; i++){
+		if(turn){
+			selectRandomItem(names, group1);	
+		}
+		else{
+			selectRandomItem(names, group2);
+		}
 		emptyString += "-";
 	}
 	var reply = {
@@ -121,7 +127,7 @@ app.get('/group', sendGroup = function(req, res){
 	}
 	res.send(reply);
 });
-
+var arrayLength = names.length;
 app.get('/group/add/:person?', addPerson = function(req, res){
 	var person = String(req.params.person),
 		reply;
@@ -138,7 +144,11 @@ app.get('/group/add/:person?', addPerson = function(req, res){
 			// fs.writeFile('group.json', group_data, success = function(err){
 			// 	console.log("Done!");
 			// });
+			arrayLength++;
 			names.push(person);
+			console.log(names.length);
+			console.log(arrayLength);
+			times = round(arrayLength/2,2);
 			reply = person + " added"
 		}
 	}
@@ -175,6 +185,7 @@ function round(value, decimals) {
  * @return {String}          Returns the selected item as a string
  */
 function selectRandomItem (items, subItems){
+	turn = !turn;
 	if(items.length !== 0){
 		var temp = "";
 		item = items[Math.floor(Math.random()*items.length)]; 
